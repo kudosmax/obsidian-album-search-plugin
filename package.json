@@ -1,7 +1,7 @@
 {
   "name": "obsidian-album-search-plugin",
   "version": "1.0.0",
-  "description": "Search for albums using iTunes API and create notes with a custom template.",
+  "description": "Search for albums using the Spotify API and create notes with a custom template.",
   "main": "main.js",
   "scripts": {
     "dev": "node esbuild.config.mjs",
