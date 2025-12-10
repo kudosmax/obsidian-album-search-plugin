@@ -1,0 +1,10 @@
+{
+  "id": "obsidian-album-search-plugin",
+  "name": "Album Search Plugin",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "Search for albums using iTunes API and create notes with a custom template.",
+  "author": "Youngmin Choi",
+  "authorUrl": "https://github.com/yourusername",
+  "isDesktopOnly": false
+}
