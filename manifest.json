@@ -1,10 +1,10 @@
 {
-  "id": "obsidian-album-search-plugin",
-  "name": "Album Search Plugin",
-  "version": "1.0.0",
+  "id": "album-search",
+  "name": "Album Search",
+  "version": "1.0.1",
   "minAppVersion": "0.15.0",
   "description": "Search for albums using the Spotify API and create notes with a custom template.",
-  "author": "Youngmin Choi",
+  "author": "Max Choi",
   "authorUrl": "https://github.com/kudosmax",
   "isDesktopOnly": false
 }

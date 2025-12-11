@@ -1,6 +1,6 @@
 {
-  "name": "obsidian-album-search-plugin",
-  "version": "1.0.0",
+  "name": "album-search",
+  "version": "1.0.1",
   "description": "Search for albums using the Spotify API and create notes with a custom template.",
   "main": "main.js",
   "scripts": {
@@ -13,9 +13,10 @@
     "plugin",
     "music",
     "album",
-    "search"
+    "search",
+    "spotify"
   ],
-  "author": "Youngmin Choi",
+  "author": "Max Choi",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^16.11.6",
