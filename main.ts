@@ -67,7 +67,7 @@ export default class AlbumSearchPlugin extends Plugin {
           !this.settings.spotifyClientSecret
         ) {
           new Notice(
-            'Please set your Spotify Client ID and Secret in settings.'
+            'Please set your Spotify client ID and secret in settings.'
           );
           return;
         }
@@ -296,13 +296,13 @@ rating:
         this.plugin.app.vault.getAbstractFileByPath(filePath);
       if (existingFile instanceof TFile) {
         new Notice(`File ${filename} already exists!`);
-        this.plugin.app.workspace.getLeaf().openFile(existingFile);
+        await this.plugin.app.workspace.getLeaf().openFile(existingFile);
       } else {
         const newFile = await this.plugin.app.vault.create(
           filePath,
           content
         );
-        this.plugin.app.workspace.getLeaf().openFile(newFile);
+        await this.plugin.app.workspace.getLeaf().openFile(newFile);
         new Notice(`Created ${filename}`);
       }
     } catch (error) {
@@ -328,13 +328,10 @@ class AlbumSearchSettingTab extends PluginSettingTab {
   display(): void {
     const { containerEl } = this;
     containerEl.empty();
-    new Setting(containerEl)
-        .setName('Album search settings')
-        .setHeading();
 
     new Setting(containerEl)
       .setName('Spotify client ID')
-      .setDesc('Your Spotify App Client ID')
+      .setDesc('Your Spotify application client ID')
       .addText((text) =>
         text
           .setPlaceholder('Client ID')
@@ -347,10 +344,10 @@ class AlbumSearchSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Spotify client secret')
-      .setDesc('Your Spotify App Client Secret')
+      .setDesc('Your Spotify application client secret')
       .addText((text) =>
         text
-          .setPlaceholder('Client Secret')
+          .setPlaceholder('Client secret')
           .setValue(this.plugin.settings.spotifyClientSecret)
           .onChange(async (value) => {
             this.plugin.settings.spotifyClientSecret = value;
@@ -386,7 +383,7 @@ class AlbumSearchSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Template file')
-      .setDesc('Path to template file.')
+      .setDesc('Path to template file')
       .addText((text) =>
         text
           .setPlaceholder('Templates/Album Template.md')
