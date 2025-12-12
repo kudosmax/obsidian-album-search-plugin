@@ -67,7 +67,7 @@ export default class AlbumSearchPlugin extends Plugin {
           !this.settings.spotifyClientSecret
         ) {
           new Notice(
-            'Please set your Spotify client ID and secret in settings.'
+            'Spotify client ID and secret required in settings.'
           );
           return;
         }
@@ -118,12 +118,12 @@ export default class AlbumSearchPlugin extends Plugin {
         return this.accessToken;
       } else {
         console.error('Spotify Auth Failed:', response);
-        new Notice('Failed to authenticate with Spotify.');
+        new Notice('Spotify authentication failed.');
         return null;
       }
     } catch (error) {
       console.error('Spotify Auth Error:', error);
-      new Notice('Error authenticating with Spotify.');
+      new Notice('Spotify authentication error.');
       return null;
     }
   }
@@ -159,7 +159,7 @@ class AlbumSearchModal extends SuggestModal<SpotifyAlbum> {
       if (response.status === 200) {
         return response.json.albums.items;
       } else {
-        new Notice('Failed to search Spotify.');
+        new Notice('Spotify search failed.');
         return [];
       }
     } catch (error) {
@@ -331,7 +331,7 @@ class AlbumSearchSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Spotify client ID')
-      .setDesc('Your Spotify application client ID')
+      .setDesc('Application client ID')
       .addText((text) =>
         text
           .setPlaceholder('Client ID')
@@ -344,7 +344,7 @@ class AlbumSearchSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Spotify client secret')
-      .setDesc('Your Spotify application client secret')
+      .setDesc('Application client secret')
       .addText((text) =>
         text
           .setPlaceholder('Client secret')
