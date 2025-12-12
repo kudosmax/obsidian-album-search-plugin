@@ -1,8 +1,5 @@
 import {
   App,
-  Editor,
-  MarkdownView,
-  Modal,
   Notice,
   Plugin,
   PluginSettingTab,
@@ -63,7 +60,7 @@ export default class AlbumSearchPlugin extends Plugin {
     // Create the command to open the search modal
     this.addCommand({
       id: 'search-album',
-      name: 'Search Album',
+      name: 'Search album',
       callback: () => {
         if (
           !this.settings.spotifyClientId ||
@@ -182,7 +179,7 @@ class AlbumSearchModal extends SuggestModal<SpotifyAlbum> {
         ? album.images[album.images.length - 1].url
         : ''; // Use smallest image for thumbnail
     if (imageUrl) {
-      const img = container.createEl('img', {
+      container.createEl('img', {
         attr: { src: imageUrl },
         cls: 'album-cover-thumbnail',
       });
@@ -199,12 +196,15 @@ class AlbumSearchModal extends SuggestModal<SpotifyAlbum> {
     text.createDiv({ text: year, cls: 'album-year' });
   }
 
-  async onChooseSuggestion(
+  onChooseSuggestion(
     album: SpotifyAlbum,
     evt: MouseEvent | KeyboardEvent
   ) {
     new Notice(`Selected: ${album.name}`);
-    await this.createAlbumNote(album);
+    this.createAlbumNote(album).catch((err) => {
+        console.error("Failed to create album note", err);
+        new Notice("Failed to create album note");
+    });
   }
 
   async createAlbumNote(album: SpotifyAlbum) {
@@ -308,6 +308,7 @@ rating:
     } catch (error) {
       console.error('Error creating album note:', error);
       new Notice('Error creating album note.');
+      throw error;
     }
   }
 
@@ -327,10 +328,12 @@ class AlbumSearchSettingTab extends PluginSettingTab {
   display(): void {
     const { containerEl } = this;
     containerEl.empty();
-    containerEl.createEl('h2', { text: 'Album Search Settings' });
+    new Setting(containerEl)
+        .setName('Album search settings')
+        .setHeading();
 
     new Setting(containerEl)
-      .setName('Spotify Client ID')
+      .setName('Spotify client ID')
       .setDesc('Your Spotify App Client ID')
       .addText((text) =>
         text
@@ -343,7 +346,7 @@ class AlbumSearchSettingTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
-      .setName('Spotify Client Secret')
+      .setName('Spotify client secret')
       .setDesc('Your Spotify App Client Secret')
       .addText((text) =>
         text
@@ -369,7 +372,7 @@ class AlbumSearchSettingTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
-      .setName('File Name Format')
+      .setName('File name format')
       .setDesc('Available variables: {{title}}, {{artist}}, {{year}}')
       .addText((text) =>
         text
@@ -382,7 +385,7 @@ class AlbumSearchSettingTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
-      .setName('Template File')
+      .setName('Template file')
       .setDesc('Path to template file.')
       .addText((text) =>
         text
